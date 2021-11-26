@@ -1,4 +1,4 @@
-type TraitName = 'move'
+type TraitName = 'move' | 'collide'
 
 interface Trait {
     name: TraitName;

@@ -1,52 +1,71 @@
-import type Creature from "src/creature/Creature";
+import type Creature from "../creature/Creature";
+import { randomIntFromInterval } from "../vaHelpers/functions";
 
-export default class Move implements Trait{
+type StraightDirection = 'N' | 'S' | 'W' | 'E';
+type DiagonalDirection = 'NE' | 'SE' | 'SW' | 'NW';
+const AVAILABLEDIRECTIONS:(StraightDirection | DiagonalDirection)[] = ['N', 'S', 'W', 'E', 'NE', 'SE', 'SW', 'NW'];
+
+export default class Move implements Trait {
     velocity: number;
-    private radians: number;
-    startingPos_y: number;
-    startingPos_x: number;
-    radio: number;
+    direction: (StraightDirection | DiagonalDirection);
+    steps: number;
     constructor(public name: TraitName, public self: Creature) {
         this.velocity = 0;
-        this.radians = 0;
-        this.startingPos_x = self.pos.x
-        this.startingPos_y = self.pos.y
-        this.radio = randomIntFromInterval(1, 200);
+        this.steps = 0;
+        this.direction = 'E';
     }
 
-    update(){
-        this.radians += this.velocity;
-        this.self.pos.x = this.startingPos_x + Math.cos(this.radians)*this.radio;
-        this.self.pos.y = this.startingPos_y + Math.sin(this.radians)*this.radio;
+    update() {
+        if (this.steps >= 0) {
+            this.walk();
+        } else {
+            this.chooseDirection();
+            this.chooseAmountOfSteps();
+        }
     }
 
-    pause(){
+    walk() {
+        switch (this.direction) {
+            case 'N':
+                this.self.pos.y -= this.velocity;
+                break;
+            case 'S':
+                this.self.pos.y += this.velocity;
+                break;
+            case 'W':
+                this.self.pos.x -= this.velocity;
+                break;
+            case 'E':
+                this.self.pos.x += this.velocity;
+                break;
+            case 'NE':
+                this.self.pos.y -= this.velocity;
+                this.self.pos.x += this.velocity;
+                break;
+            case 'NW':
+                this.self.pos.y -= this.velocity;
+                this.self.pos.x -= this.velocity;
+                break;
+            case 'SE':
+                this.self.pos.y += this.velocity;
+                this.self.pos.x += this.velocity;
+                break;
+            case 'SW':
+                this.self.pos.y += this.velocity;
+                this.self.pos.x -= this.velocity;
+                break;
+            default:
+                break;
+        }
 
+        this.steps--;
     }
 
-    go(){
-        // const velocity = (self.traits.get('move') as Move).velocity;
-        // self.pos.x += velocity;
+    chooseDirection() {
+        this.direction = AVAILABLEDIRECTIONS[randomIntFromInterval(0, AVAILABLEDIRECTIONS.length)];
+    }
+
+    chooseAmountOfSteps() {
+        this.steps = randomIntFromInterval(0, 50);
     }
 }
-
-
-function randomIntFromInterval(min:number, max:number) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-
-/**
- * neuronas vaiksciot ratais
- * neuronas vaiksciot tiesiai
- * neuronas vaiksciot atgal
- * neuronas random vaiksciojimui (suma ratais tiesiai ir atgal)
- */
-
-/**
- * randome judesys:
-	1. nusprest i kuria puse nori eit [R-PR-ŠR-P-PR-PV-V-PV-ŠV-Š-ŠV-ŠR];
-	2. nusprest kiek zingsniu nori nueit 
-		2.a [Š-P-R-V] po viena gali eiti zingsni _ ar |
-		2.b [PR-ŠR-PV-ŠV] eiti p du zingsnius _|
- */
