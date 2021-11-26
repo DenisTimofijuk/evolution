@@ -13,16 +13,29 @@ import Move from './traits/Move';
 const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 
-const creature = new Creature();
-creature.pos.set(60, 60);
-creature.addTrait(new Move('move'));
-(creature.traits.get('move') as Move).velocity = 0.2;
+const creatures:Creature[] = [];
+
+while(creatures.length < 50){
+    const creature = new Creature();
+    creature.pos.set(randomIntFromInterval(200, canvas.width-200), randomIntFromInterval(200, canvas.width-200));
+    creature.addTrait(new Move('move', creature));
+    (creature.traits.get('move') as Move).velocity = randomIntFromInterval(1, 50)/100;
+    
+    creatures.push(creature);
+}
+
+
+function randomIntFromInterval(min:number, max:number) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
 
 function start(){
-    creature.traits.forEach(trait => trait.update(creature));
+    creatures.forEach(creature => creature.traits.forEach(trait => trait.update()));
     ctx?.clearRect(0, 0, canvas.width, canvas.height);
-    ctx?.drawImage(creature.canvas, creature.pos.x, creature.pos.y);
+    creatures.forEach(creature => {
+        ctx?.drawImage(creature.canvas, creature.pos.x, creature.pos.y);
+    });    
 
     requestAnimationFrame(start)
 }
