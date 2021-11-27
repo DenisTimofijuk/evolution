@@ -62,7 +62,7 @@ export default class Move implements Trait {
     }
 
     chooseDirection() {
-        this.direction = AVAILABLEDIRECTIONS[randomIntFromInterval(0, AVAILABLEDIRECTIONS.length)];
+        this.direction = AVAILABLEDIRECTIONS[randomIntFromInterval(0, AVAILABLEDIRECTIONS.length-1)];
     }
 
     chooseAmountOfSteps() {

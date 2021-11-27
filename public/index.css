@@ -2,4 +2,27 @@
   display: block;
   margin: 2rem auto;
   border: 1px solid brown;
+  image-rendering: pixelated;
+  height: 90vh;
+}
+
+#resultWrapper{
+  border: 1px solid rgb(98, 223, 196);
+  width: 1000px;
+  height: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.dir-bar{
+  background-color: violet;
+  width: 50px;
+}
+
+.dir-bar::before{
+  content: attr(id);
 }

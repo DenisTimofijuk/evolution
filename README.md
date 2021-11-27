@@ -22,3 +22,24 @@ Your app is ready to be deployed!
 ### Q: What about Eject?
 
 No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+
+
+
+Multi cursor
+	-) create cursor on all occurrences of a string - select string and press Ctrl+Shift+L
+	-) add a cursor - CTRL+Alt+UpArrow
+Format text
+	-) Shift+Alt+F
+
+Emmet
+	write this ul>li.item$*5 then pres Ctrl+Space then Enter
+
+
+
+Snow pack:
+All Commands:
+
+  npm install      Install your dependencies. (We already ran this one for you!)
+  npm start        Start your development server.
+  npm run build    Build your website for production.
+  npm test         Run your tests.
