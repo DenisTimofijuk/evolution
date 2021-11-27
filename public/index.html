@@ -9,9 +9,16 @@
     <title>Snowpack App</title>
   </head>
   <body>
-    <canvas width="100" height="80" id="canvas"></canvas>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <div class="container">
+      <div><canvas width="128" height="96" id="canvas"></canvas></div>
+      <div id="outputWrapper">
+        <div class="title">Generation <span id="genNumber"></span></div>
+        <div> Total creatures: <span id="totCreatures"></span></div>
+      </div>
+    </div>
+        
     <script type="module" src="/dist/index.js"></script>
-    <div id="resultWrapper"></div>
   </body>
 </html>

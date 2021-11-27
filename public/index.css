@@ -6,23 +6,21 @@
   height: 90vh;
 }
 
-#resultWrapper{
-  border: 1px solid rgb(98, 223, 196);
-  width: 1000px;
-  height: 600px;
-  margin: auto;
+.container{
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: flex-end;
+  align-content: stretch;
+  margin: 1rem 2rem;
 }
 
-.dir-bar{
-  background-color: violet;
-  width: 50px;
+#outputWrapper{
+  height: 90vh;
+  width: -webkit-fill-available;
+  border: 1px solid;
+  margin: 2rem 1rem;
 }
 
-.dir-bar::before{
-  content: attr(id);
+.title{
+  font-size: xx-large;
 }

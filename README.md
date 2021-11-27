@@ -1,45 +1,32 @@
-# New Project
+# Evolution simulator
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+This is JavaScript project inspired by youtube video [I programmed some creatures. They Evolved.](https://www.youtube.com/watch?v=N3tRFayqVtk&list=WL&index=2).
 
-## Available Scripts
-
-### npm start
-
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
-
-The page will reload if you make edits.
-You will also see any lint errors in the console.
-
-### npm run build
-
-Builds a static copy of your site to the `build/` folder.
-Your app is ready to be deployed!
-
-**For the best production performance:** Add a build bundler plugin like [@snowpack/plugin-webpack](https://github.com/snowpackjs/snowpack/tree/main/plugins/plugin-webpack) or [snowpack-plugin-rollup-bundle](https://github.com/ParamagicDev/snowpack-plugin-rollup-bundle) to your `snowpack.config.mjs` config file.
-
-### Q: What about Eject?
-
-No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+ * 1. Self-replication
+ * 2. Blueprint
+ * 3. Inherit blueprint
+ * 4. Mutation
+ * 5. Selection
 
 
 
+# VS code tips
+  
 Multi cursor
-	-) create cursor on all occurrences of a string - select string and press Ctrl+Shift+L
-	-) add a cursor - CTRL+Alt+UpArrow
+	- create cursor on all occurrences of a string - select string and press Ctrl+Shift+L
+	- add a cursor - CTRL+Alt+UpArrow
+  
 Format text
-	-) Shift+Alt+F
-
+	- Shift+Alt+F
+  
 Emmet
-	write this ul>li.item$*5 then pres Ctrl+Space then Enter
+	- write this ul>li.item$*5 then pres Ctrl+Space then Enter
 
+# Using snowpack
 
-
-Snow pack:
 All Commands:
-
-  npm install      Install your dependencies. (We already ran this one for you!)
-  npm start        Start your development server.
-  npm run build    Build your website for production.
-  npm test         Run your tests.
+  
+  - npm install      Install your dependencies. (We already ran this one for you!)
+  - npm start        Start your development server.
+  - npm run build    Build your website for production.
+  - npm test         Run your tests.
