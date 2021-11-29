@@ -1,5 +1,5 @@
-import type Creature from "../creature/Creature";
-import { randomIntFromInterval } from "../vaHelpers/functions";
+import type Creature from "../world elements/Creature";
+import { randomIntFromInterval } from "../va functions/functions";
 
 type StraightDirection = 'N' | 'S' | 'W' | 'E';
 type DiagonalDirection = 'NE' | 'SE' | 'SW' | 'NW';

@@ -1,6 +1,6 @@
-import { Vec } from "../vaHelpers/Vec";
+import { Vec } from "../va functions/Vec";
 
-export default class Creature {
+export default class Creature implements LayerElements {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     fillColor: string;
@@ -21,10 +21,10 @@ export default class Creature {
         this.canvas.height = this.size;
         this.ctx = this.canvas.getContext('2d', {alpha: false})!;
 
-        this.createImage();
+        this.draw();
     }
 
-    private createImage() {
+    draw() {
         this.ctx.imageSmoothingEnabled = false;
         this.ctx.beginPath();
         this.ctx.fillStyle = this.fillColor;

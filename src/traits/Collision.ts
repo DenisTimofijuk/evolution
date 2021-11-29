@@ -1,5 +1,4 @@
-import type Creature from "src/creature/Creature";
-import type Move from "./Move";
+import type Creature from "src/world elements/Creature";
 
 export default class Collision implements Trait {
     canvas: HTMLCanvasElement;
