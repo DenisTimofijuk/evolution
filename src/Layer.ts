@@ -31,7 +31,7 @@ export default class Layer {
         this.elements = this.elements?.filter(element => element.alive);
     }
 
-    drawElements(){
+    draw(){
         this.elements?.forEach(element => {
             this.ctx.drawImage(element.canvas, Math.round(element.pos.x), Math.round(element.pos.y))
         })

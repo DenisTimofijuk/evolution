@@ -3,7 +3,7 @@ import type Layer from "./Layer";
 export default class Compositor {
     layers: Layer[];
     private outputCtx: CanvasRenderingContext2D;
-    constructor(private outputCanvas:HTMLCanvasElement) {
+    constructor(outputCanvas:HTMLCanvasElement) {
         this.outputCtx = outputCanvas.getContext('2d')!;
         this.layers = [];
     }
