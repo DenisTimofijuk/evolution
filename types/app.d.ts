@@ -1,8 +1,8 @@
-type TraitName = 'move' | 'collide' | 'aging';
+type TraitName = 'move' | 'collide' | 'aging' | 'eat';
 
 interface Trait {
     name: TraitName;
-    self: Creature;
+    self: LayerElements;
     update(): void;
 }
 

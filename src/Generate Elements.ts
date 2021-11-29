@@ -4,6 +4,7 @@ import Collision from "./traits/Collision";
 import Move from "./traits/Move";
 import { randomIntFromInterval } from "./va functions/functions";
 import Food from "./world elements/Food";
+import Eat from "./traits/Eat";
 
 export function generateCreaturesOnWorld(total:number, worldWidth:number, worldHeight:number) {
     const creaturesArray:Creature[] = [];
@@ -13,6 +14,7 @@ export function generateCreaturesOnWorld(total:number, worldWidth:number, worldH
         creature.addTrait(new Move('move', creature));
         creature.addTrait(new Collision('collide', creature));
         creature.addTrait(new Aging('aging', creature));
+        creature.addTrait(new Eat('eat', creature));
         (creature.traits.get('move') as Move).velocity = randomIntFromInterval(1, 200)/1000;
         creature.lifeTime = randomIntFromInterval(200, 1000);
         

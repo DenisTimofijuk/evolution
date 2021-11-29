@@ -13,7 +13,7 @@ export default class Food implements LayerElements{
         this.pos = new Vec();
         this.fillColor = '#6bf748';
         this.canvas = document.createElement('canvas');
-        this.size = 3;
+        this.size = 1;
         this.canvas.width = this.size;
         this.canvas.height = this.size;
         this.alive = true;
