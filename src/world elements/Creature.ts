@@ -9,7 +9,9 @@ export default class Creature implements LayerElement {
     size: number;
     lifeTime: number;
     alive: boolean;
+    childrens: LayerElement[];
     constructor() {
+        this.childrens = [];
         this.traits = new Map();
         this.pos = new Vec();
         this.fillColor = 'grey';

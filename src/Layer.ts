@@ -4,9 +4,10 @@ import type Move from "./traits/Move";
 export default class Layer {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-    elements?: LayerElement[];
+    elements: LayerElement[];
     matrix: Matrix;
     constructor(public name: LayerName, width: number, height: number) {
+        this.elements = [];
         this.canvas = document.createElement('canvas') as HTMLCanvasElement;
         this.canvas.width = width;
         this.canvas.height = height;
@@ -24,9 +25,9 @@ export default class Layer {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    setElements(elements: LayerElement[]) {
-        this.elements = elements;
-        elements.forEach(element => this.matrix.set(Math.round(element.pos.x), Math.round(element.pos.y), element));
+    addElement(element: LayerElement){
+        this.elements.push(element);
+        this.matrix.set(Math.round(element.pos.x), Math.round(element.pos.y), element);
     }
 
     updateTraits(layers: Map<LayerName, Layer>) {
@@ -54,6 +55,13 @@ export default class Layer {
                     this.matrix.set(Math.round(newPosition.x), Math.round(newPosition.y), element);
                 }                
             }            
+        })
+    }
+
+    releaseChildrensInToTheWorld(){
+        this.elements.filter(element => element.childrens.length > 0).forEach(elementWithChildrens => {
+            elementWithChildrens.childrens.forEach(child => this.addElement(child));
+            elementWithChildrens.childrens = [];
         })
     }
 }

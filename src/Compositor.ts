@@ -23,6 +23,7 @@ export default class Compositor {
             layer.updateTraits(this.layers);
             layer.updateMatrix();
             layer.removeDeadElements();
+            layer.releaseChildrensInToTheWorld();
         })
     }
 }

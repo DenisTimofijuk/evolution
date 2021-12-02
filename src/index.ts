@@ -15,8 +15,9 @@ compositor.addLayer(foodLayer);
 compositor.addLayer(creatureLayer);
 
 
-creatureLayer.setElements(generateCreaturesOnWorld(1000, canvas.width, canvas.height));
-foodLayer.setElements(generateFoodOnWorld(1000, canvas.width-3, canvas.height-3))
+generateCreaturesOnWorld(1000, canvas.width, canvas.height).forEach(element => creatureLayer.addElement(element));
+generateFoodOnWorld(1000, canvas.width-3, canvas.height-3).forEach(element => foodLayer.addElement(element));
+
 foodLayer.draw();
 
 let TOTAL_LIFE_TIME = 0;
@@ -35,6 +36,8 @@ function runSimulator(){
     
     creatureLayer.clear();
     creatureLayer.draw();  
+    foodLayer.clear();
+    foodLayer.draw();
 
     backgroundLayer.fillAll();
     compositor.compose();

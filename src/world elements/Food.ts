@@ -8,7 +8,9 @@ export default class Food implements LayerElement{
     traits: Map<TraitName, Trait>;
     private size: number;
     alive: boolean;
+    childrens: LayerElement[];
     constructor() {
+        this.childrens = [];
         this.traits = new Map();
         this.pos = new Vec();
         this.fillColor = '#6bf748';

@@ -6,6 +6,9 @@ export default class Eaten implements Trait {
     }
     
     update(layers: Map<LayerName, Layer>): void {
-        
+        const creature = layers.get('creatures')?.matrix.get(Math.round(this.self.pos.x), Math.round(this.self.pos.y));
+        if(creature){
+            this.self.alive = false;
+        }
     }
 }

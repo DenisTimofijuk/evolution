@@ -1,4 +1,4 @@
-type TraitName = 'move' | 'collide' | 'aging' | 'eat';
+type TraitName = 'move' | 'collide' | 'aging' | 'eat' | 'eaten' | 'multiply';
 type LayerName = 'background' | 'creatures' | 'food';
 
 interface Trait {
@@ -10,6 +10,7 @@ interface Trait {
 interface LayerElement {
     canvas: HTMLCanvasElement;
     traits: Map<TraitName, Trait>;
+    childrens: LayerElement[];
     addTrait(trait: Trait): void;
     draw():void;
     remove():void;
