@@ -1,15 +1,15 @@
 import type Layer from "./Layer";
 
 export default class Compositor {
-    layers: Layer[];
+    layers: Map<LayerName, Layer>;
     private outputCtx: CanvasRenderingContext2D;
     constructor(outputCanvas:HTMLCanvasElement) {
         this.outputCtx = outputCanvas.getContext('2d')!;
-        this.layers = [];
+        this.layers = new Map();
     }
 
     addLayer(layer:Layer){
-        this.layers.push(layer);
+        this.layers.set(layer.name, layer);
     }
 
     compose(){
@@ -20,7 +20,8 @@ export default class Compositor {
 
     update(){
         this.layers.forEach(layer => {
-            layer.updateTraits();
+            layer.updateTraits(this.layers);
+            layer.updateMatrix();
             layer.removeDeadElements();
         })
     }

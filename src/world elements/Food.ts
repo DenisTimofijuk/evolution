@@ -1,6 +1,6 @@
 import { Vec } from "../va functions/Vec";
 
-export default class Food implements LayerElements{
+export default class Food implements LayerElement{
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     private fillColor: string;

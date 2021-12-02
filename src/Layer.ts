@@ -1,39 +1,59 @@
+import Matrix from "./Matrix";
+import type Move from "./traits/Move";
+
 export default class Layer {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-    elements?: LayerElements[];
-    constructor(public name:string, width:number, height:number) {
+    elements?: LayerElement[];
+    matrix: Matrix;
+    constructor(public name: LayerName, width: number, height: number) {
         this.canvas = document.createElement('canvas') as HTMLCanvasElement;
         this.canvas.width = width;
         this.canvas.height = height;
         this.ctx = this.canvas.getContext('2d')!;
         this.ctx.imageSmoothingEnabled = false;
+        this.matrix = new Matrix();
     }
 
-    clear(){
+    clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    fillAll(){
+    fillAll() {
         this.ctx.fillStyle = 'white';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    setElements(elements:LayerElements[]){
+    setElements(elements: LayerElement[]) {
         this.elements = elements;
+        elements.forEach(element => this.matrix.set(Math.round(element.pos.x), Math.round(element.pos.y), element));
     }
 
-    updateTraits(){
-        this.elements?.forEach(element => element.traits.forEach(trait => trait.update()));
+    updateTraits(layers: Map<LayerName, Layer>) {
+        this.elements?.forEach(element => element.traits.forEach(trait => trait.update(layers)));
     }
 
-    removeDeadElements(){
+    removeDeadElements() {
         this.elements = this.elements?.filter(element => element.alive);
     }
 
-    draw(){
+    draw() {
         this.elements?.forEach(element => {
             this.ctx.drawImage(element.canvas, Math.round(element.pos.x), Math.round(element.pos.y))
+        })
+    }
+
+    updateMatrix(){
+        this.elements?.forEach(element => {
+            const moveTrait = element.traits.get('move') as Move | undefined;
+            if(moveTrait && moveTrait.stespHistory.length == 2){
+                const oldPosition = moveTrait.stespHistory[0];
+                const newPosition = moveTrait.stespHistory[1];
+                this.matrix.delete(Math.round(oldPosition.x), Math.round(oldPosition.y));
+                if(element.alive){
+                    this.matrix.set(Math.round(newPosition.x), Math.round(newPosition.y), element);
+                }                
+            }            
         })
     }
 }

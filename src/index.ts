@@ -16,7 +16,7 @@ compositor.addLayer(creatureLayer);
 
 
 creatureLayer.setElements(generateCreaturesOnWorld(1000, canvas.width, canvas.height));
-foodLayer.setElements(generateFoodOnWorld(100, canvas.width-3, canvas.height-3))
+foodLayer.setElements(generateFoodOnWorld(1000, canvas.width-3, canvas.height-3))
 foodLayer.draw();
 
 let TOTAL_LIFE_TIME = 0;
@@ -44,6 +44,7 @@ function runSimulator(){
 
     if(creatureLayer.elements!.length > 0){
         requestAnimationFrame(runSimulator);
+    }else{
+        compositor.layers.forEach(layer => console.log(layer.name, layer.matrix))
     }
 }
-

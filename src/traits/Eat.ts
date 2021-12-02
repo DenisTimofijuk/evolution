@@ -1,3 +1,4 @@
+import type Layer from "src/Layer";
 import type Creature from "src/world elements/Creature";
 
 export default class Eat implements Trait{
@@ -5,8 +6,11 @@ export default class Eat implements Trait{
         
     }
     
-    update(): void {
-        // if creature is inside food place
-        //      this.self.lifeTime += 300;
+    update(layers: Map<LayerName, Layer>): void {
+        const food = layers.get('food')?.matrix.get(Math.round(this.self.pos.x), Math.round(this.self.pos.y));
+        if(food?.alive){
+            this.self.lifeTime += 10;
+            // console.log(this.self.lifeTime)
+        }
     }
 }

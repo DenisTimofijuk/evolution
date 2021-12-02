@@ -1,6 +1,6 @@
 import { Vec } from "../va functions/Vec";
 
-export default class Creature implements LayerElements {
+export default class Creature implements LayerElement {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     fillColor: string;
@@ -32,6 +32,10 @@ export default class Creature implements LayerElements {
         this.ctx.fill();
         this.ctx.closePath();
     }
+
+    remove(){
+        this.alive = false;
+    };
 
     addTrait(trait: Trait) {
         this.traits.set(trait.name, trait);

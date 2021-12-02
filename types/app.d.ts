@@ -1,16 +1,18 @@
 type TraitName = 'move' | 'collide' | 'aging' | 'eat';
+type LayerName = 'background' | 'creatures' | 'food';
 
 interface Trait {
     name: TraitName;
-    self: LayerElements;
-    update(): void;
+    self: LayerElement;
+    update(layers: Map<LayerName, Layer>): void;
 }
 
-interface LayerElements {
+interface LayerElement {
     canvas: HTMLCanvasElement;
     traits: Map<TraitName, Trait>;
     addTrait(trait: Trait): void;
     draw():void;
+    remove():void;
     ctx: CanvasRenderingContext2D;
     alive:boolean;
     pos: {
@@ -18,3 +20,5 @@ interface LayerElements {
         y: number;
     };
 }
+
+type GridElement = LayerElement

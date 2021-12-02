@@ -16,7 +16,7 @@ export function generateCreaturesOnWorld(total:number, worldWidth:number, worldH
         creature.addTrait(new Aging('aging', creature));
         creature.addTrait(new Eat('eat', creature));
         (creature.traits.get('move') as Move).velocity = randomIntFromInterval(1, 200)/1000;
-        creature.lifeTime = randomIntFromInterval(200, 1000);
+        creature.lifeTime = randomIntFromInterval(200, 300);
         
         creaturesArray.push(creature);
     }
