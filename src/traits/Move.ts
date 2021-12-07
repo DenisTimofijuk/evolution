@@ -1,6 +1,9 @@
 import type Creature from "../world elements/Creature";
 import { randomIntFromInterval } from "../va functions/functions";
 import { Vec } from "../va functions/Vec";
+import type Layer from "src/Layer";
+import type Vision from "./Vision";
+import type Food from "src/world elements/Food";
 
 type StraightDirection = 'N' | 'S' | 'W' | 'E';
 type DiagonalDirection = 'NE' | 'SE' | 'SW' | 'NW';
@@ -19,13 +22,22 @@ export default class Move implements Trait {
         this.stespHistory = [];
     }
 
-    update() {
-        if (this.steps >= 0) {
+    update(layers: Map<LayerName, Layer>) {
+        const visionTrait = this.self.traits.get('vision') as Vision;
+        if(visionTrait.visibleFood){
+            this.goTowardsFood(visionTrait.visibleFood)
+        }else if (this.steps >= 0) {
             this.walk();
         } else {
             this.chooseDirection();
             this.chooseAmountOfSteps();
         }
+    }
+
+    goTowardsFood(visibleFood: Food){
+        this.direction = this.findDirection(visibleFood.pos.x, visibleFood.pos.y);
+        
+        this.walk();
     }
 
     walk() {
@@ -68,6 +80,12 @@ export default class Move implements Trait {
 
     chooseDirection() {
         this.direction = AVAILABLEDIRECTIONS[randomIntFromInterval(0, AVAILABLEDIRECTIONS.length-1)];
+    }
+
+    findDirection(target_X:number, target_Y:number){
+        const dir: StraightDirection | DiagonalDirection = 'N';
+
+        return dir;
     }
 
     chooseAmountOfSteps() {

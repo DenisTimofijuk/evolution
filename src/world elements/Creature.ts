@@ -1,4 +1,4 @@
-import { randomIntFromInterval } from "../va functions/functions";
+import { getuuidv4, randomIntFromInterval } from "../va functions/functions";
 import { Vec } from "../va functions/Vec";
 
 export default class Creature implements LayerElement {
@@ -11,7 +11,9 @@ export default class Creature implements LayerElement {
     lifeTime: number;
     alive: boolean;
     childrens: LayerElement[];
+    UUID: string;
     constructor() {
+        this.UUID = '' + getuuidv4();
         this.childrens = [];
         this.traits = new Map();
         this.pos = new Vec();

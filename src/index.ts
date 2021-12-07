@@ -28,7 +28,7 @@ generateCreaturesOnWorld({
 
 generateFoodOnWorld({
     totalCount: 1000,
-    startingPoint_x: 95,
+    startingPoint_x: 0,
     startingPoint_y:0,
     worldWidth: canvas.width-3,
     worldHeight: canvas.height-3
@@ -55,6 +55,7 @@ function runSimulator(){
 
     if(creatureLayer.elements!.length > 0){
         requestAnimationFrame(runSimulator);
+        // setTimeout(runSimulator, 5000);
     }else{
         compositor.layers.forEach(layer => console.log("[",layer.name,"] Matrix:", layer.matrix, "Elements:", layer.elements.length))
     }

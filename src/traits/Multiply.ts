@@ -10,10 +10,14 @@ export default class Multiply implements Trait{
     
     
     update(layers: Map<LayerName, Layer>): void {
-        const eatTrait = this.self.traits.get('eat') as Eat | undefined;
-        if(eatTrait !== undefined && eatTrait.capacityFull){
+        if(this.conditionsAreMet){
             this.self.childrens.push(this.clone);
         }
+    }
+
+    get conditionsAreMet(){
+        const eatTrait = this.self.traits.get('eat') as Eat | undefined;
+        return eatTrait !== undefined && eatTrait.capacityFull;
     }
 
     get clone(){

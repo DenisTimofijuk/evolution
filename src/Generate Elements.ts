@@ -7,6 +7,7 @@ import Food from "./world elements/Food";
 import Eat from "./traits/Eat";
 import Multiply from "./traits/Multiply";
 import ManualMoov from "./traits/debugg";
+import Vision from "./traits/Vision";
 
 type WorldOptions = {
     totalCount: number;
@@ -43,6 +44,7 @@ export function generateFoodOnWorld(o:WorldOptions) {
 
 export function createCreature() {
     const creature = new Creature();
+    creature.addTrait(new Vision('vision', creature));
     creature.addTrait(new Move('move', creature));
     creature.addTrait(new Collision('collide', creature));
     creature.addTrait(new Aging('aging', creature));

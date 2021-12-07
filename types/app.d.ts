@@ -1,4 +1,4 @@
-type TraitName = 'move' | 'collide' | 'aging' | 'eat' | 'eaten' | 'multiply' | 'manualmoov';
+type TraitName = 'move' | 'collide' | 'aging' | 'eat' | 'eaten' | 'multiply' | 'manualmoov' | 'vision';
 type LayerName = 'background' | 'creatures' | 'food';
 
 interface Trait {
