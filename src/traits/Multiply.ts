@@ -11,18 +11,21 @@ export default class Multiply implements Trait{
     
     update(layers: Map<LayerName, Layer>): void {
         const eatTrait = this.self.traits.get('eat') as Eat | undefined;
-        if(eatTrait !== undefined && eatTrait.fedUp){
+        if(eatTrait !== undefined && eatTrait.capacityFull){
             this.self.childrens.push(this.clone);
         }
     }
 
     get clone(){
         const newCreature = createCreature();
-        newCreature.pos.x = this.self.pos.x;
-        newCreature.pos.y = this.self.pos.y;
-        (newCreature.traits.get('move') as Move).velocity = (this.self.traits.get('move') as Move).velocity;
-        (newCreature.traits.get('move') as Move).direction = (this.self.traits.get('move') as Move).direction;
-        (newCreature.traits.get('move') as Move).steps = (this.self.traits.get('move') as Move).steps;
+        newCreature.pos.x = this.self.pos.x-1;
+        newCreature.pos.y = this.self.pos.y-1;
+        const newCreatureMoveTrait = newCreature.traits.get('move') as Move | undefined;
+        const currentMoveTrait = this.self.traits.get('move') as Move | undefined;
+
+        newCreatureMoveTrait && currentMoveTrait && (newCreatureMoveTrait.velocity = currentMoveTrait.velocity);
+        newCreatureMoveTrait && currentMoveTrait && (newCreatureMoveTrait.direction = currentMoveTrait.direction);
+        newCreatureMoveTrait && currentMoveTrait && (newCreatureMoveTrait.steps = currentMoveTrait.steps);
 
         return newCreature
     }

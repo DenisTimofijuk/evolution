@@ -53,7 +53,7 @@ export function createCreature() {
     return creature;
 }
 
-function createFood() {
+export  function createFood() {
     const food = new Food();
 
     return food;

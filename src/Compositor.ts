@@ -30,8 +30,8 @@ export default class Compositor {
         this.layers.forEach(layer => {
             layer.updateTraits(this.layers);
             layer.updateMatrix();
-            layer.removeDeadElements();
             layer.releaseChildrensInToTheWorld();
+            layer.removeDeadElements();
         })
     }
 
