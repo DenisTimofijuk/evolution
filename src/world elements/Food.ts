@@ -35,8 +35,6 @@ export default class Food implements LayerElement{
 
     remove(){
         this.alive = false;
-        this.fillColor = 'white';
-        this.draw();
     }
 
     addTrait(trait: Trait) {

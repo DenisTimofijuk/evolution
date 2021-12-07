@@ -1,3 +1,4 @@
+import { randomIntFromInterval } from "../va functions/functions";
 import { Vec } from "../va functions/Vec";
 
 export default class Creature implements LayerElement {
@@ -17,7 +18,7 @@ export default class Creature implements LayerElement {
         this.fillColor = 'grey';
         this.canvas = document.createElement('canvas');
         this.size = 1;
-        this.lifeTime = 300;
+        this.lifeTime = randomIntFromInterval(200, 300);
         this.alive = true;
         this.canvas.width = this.size;
         this.canvas.height = this.size;

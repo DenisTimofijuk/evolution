@@ -9,9 +9,11 @@ export default class Eat implements Trait{
     
     update(layers: Map<LayerName, Layer>): void {
         const food = layers.get('food')?.matrix.get(Math.round(this.self.pos.x), Math.round(this.self.pos.y));
+        
         if(food?.alive){
             this.self.lifeTime += 10;
             this.fedUp = true;
+            food.remove();
         }else{
             this.fedUp = false;
         }

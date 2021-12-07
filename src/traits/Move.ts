@@ -13,7 +13,7 @@ export default class Move implements Trait {
     steps: number;
     stespHistory: Vec[];
     constructor(public name: TraitName, public self: Creature) {
-        this.velocity = 0;
+        this.velocity = randomIntFromInterval(1, 200) / 1000;
         this.steps = 0;
         this.direction = 'E';
         this.stespHistory = [];

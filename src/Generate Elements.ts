@@ -5,15 +5,22 @@ import Move from "./traits/Move";
 import { randomIntFromInterval } from "./va functions/functions";
 import Food from "./world elements/Food";
 import Eat from "./traits/Eat";
-import Eaten from "./traits/Eaten";
 import Multiply from "./traits/Multiply";
+import ManualMoov from "./traits/debugg";
 
-export function generateCreaturesOnWorld(total: number, worldWidth: number, worldHeight: number) {
+type WorldOptions = {
+    totalCount: number;
+    startingPoint_x: number;
+    startingPoint_y:number;
+    worldWidth: number;
+    worldHeight: number;
+}
+
+export function generateCreaturesOnWorld(o:WorldOptions) {
     const creaturesArray: Creature[] = [];
-    while (creaturesArray.length < total) {
+    while (creaturesArray.length < o.totalCount) {
         const creature = createCreature();
-        creature.pos.set(randomIntFromInterval(0, worldWidth), randomIntFromInterval(0, worldHeight));
-        (creature.traits.get('move') as Move).velocity = randomIntFromInterval(1, 200) / 1000;
+        creature.pos.set(randomIntFromInterval(o.startingPoint_x, o.worldWidth), randomIntFromInterval(o.startingPoint_y, o.worldHeight));
 
         creaturesArray.push(creature);
     }
@@ -22,11 +29,11 @@ export function generateCreaturesOnWorld(total: number, worldWidth: number, worl
 }
 
 
-export function generateFoodOnWorld(total: number, worldWidth: number, worldHeight: number) {
+export function generateFoodOnWorld(o:WorldOptions) {
     const foodArray: Food[] = [];
-    while (foodArray.length < total) {
+    while (foodArray.length < o.totalCount) {
         const food = createFood();
-        food.pos.set(randomIntFromInterval(50, worldWidth), randomIntFromInterval(0, worldHeight));
+        food.pos.set(randomIntFromInterval(o.startingPoint_x, o.worldWidth), randomIntFromInterval(o.startingPoint_y, o.worldHeight));
 
         foodArray.push(food);
     }
@@ -41,13 +48,13 @@ export function createCreature() {
     creature.addTrait(new Aging('aging', creature));
     creature.addTrait(new Eat('eat', creature));
     creature.addTrait(new Multiply('multiply', creature));
+    // creature.addTrait(new ManualMoov('manualmoov', creature));
 
     return creature;
 }
 
 function createFood() {
     const food = new Food();
-    food.addTrait(new Eaten('eaten', food));
 
     return food;
 }

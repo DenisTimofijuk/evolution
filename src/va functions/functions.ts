@@ -16,3 +16,11 @@ export function displayTotalCreatures() {
         output.innerText = total.toString();    
     }
 }
+
+
+export function displayTotalFood() {
+    const output = document.getElementById('totFood')!;
+    return function update(total:number) {
+        output.innerText = total.toString();    
+    }
+}

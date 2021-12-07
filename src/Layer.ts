@@ -35,10 +35,10 @@ export default class Layer {
     }
 
     removeDeadElements() {
-        this.elements = this.elements?.filter(element => element.alive);
+        this.elements = this.elements?.filter(element => element.alive);        
     }
 
-    draw() {
+    drawAll() {
         this.elements?.forEach(element => {
             this.ctx.drawImage(element.canvas, Math.round(element.pos.x), Math.round(element.pos.y))
         })
@@ -54,7 +54,11 @@ export default class Layer {
                 if(element.alive){
                     this.matrix.set(Math.round(newPosition.x), Math.round(newPosition.y), element);
                 }                
-            }            
+            }  
+            
+            if(!element.alive){
+                this.matrix.delete(Math.round(element.pos.x), Math.round(element.pos.y));
+            }
         })
     }
 
