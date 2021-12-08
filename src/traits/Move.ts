@@ -82,10 +82,14 @@ export default class Move implements Trait {
         this.direction = AVAILABLEDIRECTIONS[randomIntFromInterval(0, AVAILABLEDIRECTIONS.length-1)];
     }
 
-    findDirection(target_X:number, target_Y:number){
-        const dir: StraightDirection | DiagonalDirection = 'N';
-
-        return dir;
+    findDirection(target_X:number, target_Y:number): StraightDirection {
+        
+        if(Math.round(target_X) - Math.round(this.self.pos.x) < 0) return 'W';
+        if(Math.round(target_X) - Math.round(this.self.pos.x) > 0) return 'E';
+        if(Math.round(target_Y) - Math.round(this.self.pos.y) < 0) return 'N';
+        if(Math.round(target_Y) - Math.round(this.self.pos.y) > 0) return 'S';
+        else return 'N';
+        
     }
 
     chooseAmountOfSteps() {

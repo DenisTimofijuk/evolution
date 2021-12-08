@@ -46,6 +46,16 @@ runSimulator();
 function runSimulator(){
     TOTAL_LIFE_TIME++;
 
+    if(isSezonForFood(TOTAL_LIFE_TIME)){
+        generateFoodOnWorld({
+            totalCount: 5,
+            startingPoint_x: 95,
+            startingPoint_y:0,
+            worldWidth: canvas.width-3,
+            worldHeight: canvas.height-3
+        }).forEach(element => foodLayer.addElement(element));
+    }
+
     compositor.update();
     compositor.compose();
     
@@ -59,4 +69,8 @@ function runSimulator(){
     }else{
         compositor.layers.forEach(layer => console.log("[",layer.name,"] Matrix:", layer.matrix, "Elements:", layer.elements.length))
     }
+}
+
+function isSezonForFood(currentCycle:number) {
+    return Math.round(Math.sin(currentCycle / 200)) === -1;
 }

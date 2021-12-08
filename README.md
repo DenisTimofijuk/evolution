@@ -30,3 +30,9 @@ All Commands:
   - npm start        Start your development server.
   - npm run build    Build your website for production.
   - npm test         Run your tests.
+
+
+# world rules
+Creature can eat at one place, but multiply on another particular place.
+Crature can multiply only when he has eaten enought food.
+Creatures main goal is to multiply.
