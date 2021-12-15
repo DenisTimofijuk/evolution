@@ -33,6 +33,11 @@ export default class Food implements LayerElement{
         this.ctx.closePath();
     }
 
+    markTarget(){
+        this.fillColor = 'red';
+        this.draw();
+    }
+
     remove(){
         this.alive = false;
     }

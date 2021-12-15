@@ -29,7 +29,6 @@ export default class Compositor {
     private updateAll(){
         this.layers.forEach(layer => {
             layer.updateTraits(this.layers);
-            layer.updateMatrix();
             layer.releaseChildrensInToTheWorld();
             layer.removeDeadElements();
         })

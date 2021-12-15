@@ -25,17 +25,28 @@ export default class Layer {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    addElement(element: LayerElement){
+    addElement(element: LayerElement) {
         this.elements.push(element);
         this.matrix.set(Math.round(element.pos.x), Math.round(element.pos.y), element);
     }
 
     updateTraits(layers: Map<LayerName, Layer>) {
-        this.elements?.forEach(element => element.traits.forEach(trait => trait.update(layers)));
+        this.elements?.forEach(element => element.traits.forEach(trait => {
+            trait.update(layers);
+            this.updateMatrix(element);
+        }));
     }
 
     removeDeadElements() {
-        this.elements = this.elements?.filter(element => element.alive);        
+        const aliveElements: LayerElement[] = []
+        for (let element of this.elements) {
+            if (element.alive) {
+                aliveElements.push(element);
+            } else {
+                this.matrix.delete(Math.round(element.pos.x), Math.round(element.pos.y))
+            }
+        }
+        this.elements = aliveElements;       
     }
 
     drawAll() {
@@ -44,25 +55,19 @@ export default class Layer {
         })
     }
 
-    updateMatrix(){
-        this.elements?.forEach(element => {
-            const moveTrait = element.traits.get('move') as Move | undefined;
-            if(moveTrait && moveTrait.stespHistory.length == 2){
-                const oldPosition = moveTrait.stespHistory[0];
-                const newPosition = moveTrait.stespHistory[1];
-                this.matrix.delete(Math.round(oldPosition.x), Math.round(oldPosition.y));
-                if(element.alive){
-                    this.matrix.set(Math.round(newPosition.x), Math.round(newPosition.y), element);
-                }                
-            }  
-            
-            if(!element.alive){
-                this.matrix.delete(Math.round(element.pos.x), Math.round(element.pos.y));
+    updateMatrix(element: LayerElement) {
+        const moveTrait = element.traits.get('move') as Move | undefined;
+        if (moveTrait && moveTrait.stespHistory.length == 2) {
+            const oldPosition = moveTrait.stespHistory[0];
+            const newPosition = moveTrait.stespHistory[1];
+            this.matrix.delete(Math.round(oldPosition.x), Math.round(oldPosition.y));
+            if (element.alive) {
+                this.matrix.set(Math.round(newPosition.x), Math.round(newPosition.y), element);
             }
-        })
+        }
     }
 
-    releaseChildrensInToTheWorld(){
+    releaseChildrensInToTheWorld() {
         this.elements.filter(element => element.childrens.length > 0).forEach(elementWithChildrens => {
             elementWithChildrens.childrens.forEach(child => this.addElement(child));
             elementWithChildrens.childrens = [];

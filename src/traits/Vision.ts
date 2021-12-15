@@ -7,7 +7,7 @@ export default class Vision implements Trait {
     visibleFood: Food | undefined;
     constructor(public name: TraitName, public self: LayerElement) {
         this.visibleDistance = 2;
-        this.visibleFood = undefined; //TODO: sort this array by shortest distance to the element
+        this.visibleFood = undefined;
     }
 
     update(layers: Map<LayerName, Layer>): void {
@@ -36,9 +36,9 @@ export default class Vision implements Trait {
         for (let x = start_X; x <= end_X; x++) {
             for (let y = start_Y; y <= end_Y; y++) {
                 if(x === this.self.pos.x && y === this.self.pos.y) continue;
-                const visibleElement = matrix.get(x, y);
-                if( visibleElement ){
-                    this.visibleFood = visibleElement as Food;
+                const iSeeFood = matrix.get(x, y);
+                if( iSeeFood ){
+                    this.visibleFood = iSeeFood as Food;
                     return;
                 }
             }

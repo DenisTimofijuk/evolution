@@ -1,6 +1,6 @@
 
 import { displaySimulationYears, displayTotalCreatures, displayTotalFood, randomIntFromInterval } from './va functions/functions';
-import { generateCreaturesOnWorld, generateFoodOnWorld } from './Generate Elements';
+import { generateCreaturesOnWorld, generateFoodOnWorld, generateSexZone } from './Generate Elements';
 import Compositor from './Compositor';
 import Layer from './Layer';
 
@@ -10,12 +10,23 @@ const compositor = new Compositor(canvas);
 const backgroundLayer = new Layer('background', canvas.width, canvas.height);
 const creatureLayer = new Layer('creatures', canvas.width, canvas.height);
 const foodLayer = new Layer('food', canvas.width, canvas.height);
+const sexZone = new Layer('sexzone', canvas.width, canvas.height);
 
 
 compositor.addLayer(backgroundLayer);
+compositor.addLayer(sexZone);
 compositor.addLayer(foodLayer);
 compositor.addLayer(creatureLayer);
 
+generateSexZone([
+    {
+        x:70,
+        y:50,
+        width:30,
+        height:50
+    }
+]).forEach(zone => sexZone.addElement(zone));
+sexZone.drawAll();
 
 
 generateCreaturesOnWorld({
@@ -27,7 +38,7 @@ generateCreaturesOnWorld({
 }).forEach(element => creatureLayer.addElement(element));
 
 generateFoodOnWorld({
-    totalCount: 1000,
+    totalCount: 2000,
     startingPoint_x: 0,
     startingPoint_y:0,
     worldWidth: canvas.width-3,
@@ -65,7 +76,7 @@ function runSimulator(){
 
     if(creatureLayer.elements!.length > 0){
         requestAnimationFrame(runSimulator);
-        // setTimeout(runSimulator, 5000);
+        // setTimeout(runSimulator, 1000);
     }else{
         compositor.layers.forEach(layer => console.log("[",layer.name,"] Matrix:", layer.matrix, "Elements:", layer.elements.length))
     }

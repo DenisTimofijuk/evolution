@@ -36,3 +36,7 @@ All Commands:
 Creature can eat at one place, but multiply on another particular place.
 Crature can multiply only when he has eaten enought food.
 Creatures main goal is to multiply.
+
+
+Visos amebos gyvena vienoda laika
+Visos amebos per gyvenima gauna pasidaugint tik 1 karta ir palieka 2 vaikus.

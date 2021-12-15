@@ -11,6 +11,8 @@ export default class ManualMoov implements Trait {
     }
 
     handleEventListener(e: KeyboardEvent) {
+        e.preventDefault();
+        
         switch (e.code) {
             case 'ArrowDown':
                 this.self.pos.y++;
