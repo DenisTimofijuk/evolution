@@ -6,12 +6,12 @@
   height: 90vh;
 }
 
-.container{
+.container-content-wrapper{
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: stretch;
-  margin: 1rem 2rem;
+  /* margin: 1rem 2rem; */
 }
 
 #outputWrapper{

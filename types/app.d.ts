@@ -1,5 +1,6 @@
 type TraitName = 'move' | 'collide' | 'aging' | 'eat' | 'eaten' | 'multiply' | 'manualmoov' | 'vision';
 type LayerName = 'background' | 'creatures' | 'food' | 'sexzone';
+type NeuronType = 'sensory_input' | 'action_output' | 'internal'
 
 interface Trait {
     name: TraitName;
